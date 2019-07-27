@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% block body %}
+{% for blog in posts %}
+    <div class="card">
+            <div class="card-header">
+                {{blog.id}}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{blog.title}}</h5>
+                <h5 class="card-title">{{blog.pub_date}}</h5>
+                <p class="card-text">{{blog.summary}}</p>
+                <a href="{% url 'detail' blog.id %}" class="btn btn-primary">...more</a>
+                <a href="{% url 'edit' blog.id %}" class="btn btn-primary">수정하기</a>
+                <a href="{% url 'delete' blog.id %}" class="btn btn-primary">삭제하기</a>
+            </div>
+            </div>
+            {%endfor%}
+
+    <div class = "container">
+
+        {%if posts.has_previous%}
+        <a href="?page=1">First</a> <!--첫번째 페이지를 보여줌-->
+        <a href="?page={{posts.previous_page_number}}">Previous</a> <!--이전 페이지를 보여줌-->
+        {%endif%}
+
+        <span>{{posts.number}}</span><!--post가 현재 보고있는 페이지인게 그거의 번호를 지정해줌-->
+        <span>of</span><!--2 of 5-->
+        <span>{{posts.paginator.num_pages}}</span>><!--마지막 페이지-->
+
+        {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">Next</a> <!--현재보고있는페이지에서 다음페이지로-->
+        <a href="?page={{posts.paginator.num_pages}}">Last</a> <!--현재보고있는페이지에서 페이지네이터에 의한 마지막페이지로 이동-->
+        {%endif%}
+    </div>
+{% endblock %}

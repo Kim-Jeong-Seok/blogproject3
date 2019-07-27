@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+{% block body %}
+<div class="container">
+        <form action="{% url 'edit' blog.id %}" method="POST"> <!--POST 방식이 주소창에 글자가 안나오게 하는거(보안상의 목적)-->
+            {% csrf_token %} <!--보완상의 목적으로 적용 장고에서 토큰을 발행하고, 공격자가 공격을 할때 다른정보도 빼가지 못하게 막아주는 기능-->
+            <h4>제목: </h4>
+            <input type="text" name="title" value="{{blog.title}}">
+            <br>
+            <br>
+            <h4>본문: </h4>
+            <textarea cols=40 rows=10 name="body">{{blog.body}}</textarea>
+            <br>
+            <br>
+            <input class="btn btn-dark" type="submit" value="제출하기">
+        </form>
+    </div>
+{% endblock %}

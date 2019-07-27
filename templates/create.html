@@ -1,0 +1,13 @@
+
+<br>
+<div class='container'>
+
+    <form action ="{% url 'create' %}" method='POST'>
+        {% csrf_token %}
+        <ul>
+            {{form.as_p}}
+        </ul>
+        <br>
+        <input class="btn btn-dark" type="submit" value="제출하기">
+    </form>
+</div>
